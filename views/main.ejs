@@ -1,29 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        h1{
+        h1 {
             color: red;
             margin-bottom: 2rem;
+        }
+
+        .icon {
+            margin-left: .5rem;
+            cursor: pointer;
+        }
+
+        ul {
+            margin-bottom: 2rem;
+        }
+
+        input {
+            margin: 2rem;
+        }
+
+        #submit {
+            cursor: pointer;
         }
     </style>
     <title>Rappers</title>
 </head>
+
 <body>
+    <script src="https://kit.fontawesome.com/e41ece5b99.js" crossorigin="anonymous"></script>
     <h1>Current Rappers</h1>
     <ul>
         <%rappers.forEach(e=>{%>
             <li>
                 <%=e.rapperName%>
-                <%=e.birthName%>
-                <%=e.likeCount%>
+                    <%=e.birthName%>
+                        <%=e.likeCount%>
+                            <i class="fa-solid fa-thumbs-up icon" id="likeIt"></i>
+                            <i class="fa-sharp fa-solid fa-trash icon" id="delItem"></i>
             </li>
-        <%})%>
+            <%})%>
     </ul>
+    <h2>Add a Rapper: </h2>
+    <form action="/submitData" method="post">
+        <input type="text" name="stageName" id="stageName" placeholder="Stage Name">
+        <input type="text" name="birthName" id="birthName" placeholder="Birth Name">
+        <input type="submit" id="submit">
+    </form>
 
-
+    <script src="script.js"></script>
 </body>
+
 </html>
