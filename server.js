@@ -1,10 +1,11 @@
-const { urlencoded } = require('body-parser');
+const { urlencoded,json } = require('body-parser');
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
 require('dotenv').config();
 app.use(express.static(__dirname+'/public'));
-app.use(urlencoded({extended:true}));
+app.use(urlencoded({extended:false}));
+app.use(json());
 const PORT=5000
 
 //db connection 👇👇
@@ -12,7 +13,6 @@ mongoose.connect(process.env.DB_CONNECTION,{useNewUrlParser:true},{useUnifiedTop
 .then(()=>{console.log("Db connected")})
 .catch((err)=>console.error(err))
 const rappers=require('./rapperSchema');
-const bodyParser = require('body-parser');
 
 app.set('view engine','ejs');
 
@@ -28,9 +28,25 @@ app.get('/',async(req,res)=>{
     res.render('main.ejs',obj);
 })
 
-app.post('/submitData',async(req,res)=>{
-    // console.log(req.body);
+app.delete('/deleteRapper',async(req,res)=>{
+    let sName=req.body.stageName;
+    let bName=req.body.birthName;
 
+    try{
+        rappers.deleteOne({rapperName:sName,birthName:bName}).then((err)=>{
+            if(err) console.log(err);
+            else console.log("documetn deleted successfully");
+        });
+        res.json("Rapper deleted");
+    }
+    catch(e){
+        console.log(e);
+    }
+    
+
+})
+
+app.post('/submitData',async(req,res)=>{
     const obj={
         rapperName:req.body.stageName,
         birthName:req.body.birthName,
@@ -43,5 +59,5 @@ app.post('/submitData',async(req,res)=>{
         console.log(e);
     }
     res.redirect('/');
-
 })
+

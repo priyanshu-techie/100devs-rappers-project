@@ -37,9 +37,9 @@
     <ul>
         <%rappers.forEach(e=>{%>
             <li>
-                <%=e.rapperName%>
-                    <%=e.birthName%>
-                        <%=e.likeCount%>
+                <span><%=e.rapperName%></span>
+                <span><%=e.birthName%></span>
+                <span><%=e.likeCount%></span>
                             <i class="fa-solid fa-thumbs-up icon" id="likeIt"></i>
                             <i class="fa-sharp fa-solid fa-trash icon" id="delItem"></i>
             </li>
