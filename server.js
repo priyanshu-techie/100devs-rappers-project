@@ -33,7 +33,7 @@ app.delete('/deleteRapper',async(req,res)=>{
     let bName=req.body.birthName;
 
     try{
-        rappers.deleteOne({rapperName:sName,birthName:bName}).then((err)=>{
+        await rappers.deleteOne({rapperName:sName,birthName:bName}).then((err)=>{
             if(err) console.log(err);
             else console.log("documetn deleted successfully");
         });
@@ -58,6 +58,23 @@ app.post('/submitData',async(req,res)=>{
     catch(e){
         console.log(e);
     }
-    res.redirect('/');
+    res.json("rapper added");
+})
+
+app.put('/increaseLike',async (req,res)=>{
+    let sName=req.body.stageName;
+    let bName=req.body.birthName;
+    let lCount=req.body.likeCount;
+
+    try{
+        await rappers.updateOne(
+            {rapperName:sName,birthName:bName},
+            {likeCount:Number(lCount)+1}
+            )
+        res.json("Like increased");
+    }
+    catch(e){
+        console.log(e);
+    }
 })
 

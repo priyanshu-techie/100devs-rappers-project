@@ -46,9 +46,9 @@
             <%})%>
     </ul>
     <h2>Add a Rapper: </h2>
-    <form action="/submitData" method="post">
-        <input type="text" name="stageName" id="stageName" placeholder="Stage Name">
-        <input type="text" name="birthName" id="birthName" placeholder="Birth Name">
+    <form action="/submitData" method="post" onsubmit="checkInput(event)">
+        <input type="text" name="stageName" required id="stageName" placeholder="Stage Name">
+        <input type="text" name="birthName" required id="birthName" placeholder="Birth Name">
         <input type="submit" id="submit">
     </form>
 
